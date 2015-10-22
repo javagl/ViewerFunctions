@@ -38,8 +38,8 @@ import java.util.function.DoubleFunction;
 
 import de.javagl.geom.Points;
 import de.javagl.viewer.MouseControls;
-import de.javagl.viewer.Painter;
 import de.javagl.viewer.Viewer;
+import de.javagl.viewer.painters.CoordinateSystemPainter;
 
 /**
  * A panel that paints functions
@@ -87,11 +87,9 @@ public class FunctionPanel extends Viewer
         setFlippedVertically(true);
         setMaintainAspectRatio(false);
         
-        Painter axesPainter = new AxesPainter();
-        //Painter axesPainter = new ScreenFixedAxesPainter(this, 
-        //    -1, 100, 50, 50, 
-        //    50, 50, 100, -1);
-        addPainter(axesPainter);
+        CoordinateSystemPainter coordinateSystemPainter = 
+            new CoordinateSystemPainter();
+        addPainter(coordinateSystemPainter);
         
         this.functions = new ArrayList<DoubleFunction<? extends Number>>();
         this.functionPainters = new ArrayList<FunctionPainter>();

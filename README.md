@@ -20,3 +20,15 @@ sufficient to create a simple plot:
 ![ViewerFunctionsScreenshot02.png](/screenshots/ViewerFunctionsScreenshot02.png)
 
 
+# Changes
+
+
+0.0.2 : 
+
+  * Removed `AxesPainter` and replaced it with the
+    `CoordinateSystemPainter` that was added in version 0.0.3 
+    of the main [Viewer](https://github.com/javagl/Viewer) project
+
+0.0.1 : 
+
+  * Initial commit

@@ -10,6 +10,7 @@ import java.util.function.DoubleFunction;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import de.javagl.viewer.MouseControls;
 import de.javagl.viewer.functions.FunctionPanel;
 
 /**
@@ -44,6 +45,7 @@ public class SimpleViewerFunctionsTest
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         FunctionPanel functionPanel = new FunctionPanel();
+        functionPanel.setMouseControl(MouseControls.createDefault(functionPanel));
         DoubleFunction<Double> function0 = x -> Math.sin(x);
         functionPanel.addFunctionWithValueLegend(
             function0, Color.RED, "Sine");
