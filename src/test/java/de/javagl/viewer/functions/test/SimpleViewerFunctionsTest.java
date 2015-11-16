@@ -46,12 +46,12 @@ public class SimpleViewerFunctionsTest
 
         FunctionPanel functionPanel = new FunctionPanel();
         functionPanel.setMouseControl(MouseControls.createDefault(functionPanel));
-        DoubleFunction<Double> function0 = x -> Math.sin(x);
+        DoubleFunction<Double> function0 = Math::sin;
         functionPanel.addFunctionWithValueLegend(
             function0, Color.RED, "Sine");
         functionPanel.setDisplayedWorldArea(
             -1.0, -2.0, 12.0, 4.0);
-        
+
         f.getContentPane().add(functionPanel);
 
         f.setSize(300,300);

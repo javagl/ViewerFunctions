@@ -47,6 +47,11 @@ import de.javagl.viewer.Painter;
 class FunctionPainter implements Painter
 {
     /**
+     * A transform, used internally for painting
+     */
+    private final AffineTransform TEMP_TRANSFORM = new AffineTransform();
+    
+    /**
      * The functions to be painted
      */
     private final DoubleFunction<? extends Number> function;
@@ -143,8 +148,11 @@ class FunctionPainter implements Painter
             RenderingHints.KEY_ANTIALIASING, 
             RenderingHints.VALUE_ANTIALIAS_ON);
         
+        TEMP_TRANSFORM.setTransform(worldToScreen);
+        //TEMP_TRANSFORM.scale(1.0, -1.0);
+        
         Rectangle2D boundsWorld = Rectangles.computeBounds(
-            AffineTransforms.invert(worldToScreen, null), 
+            AffineTransforms.invert(TEMP_TRANSFORM, null), 
             new Rectangle2D.Double(0,0,w,h), null);
         double w0 = boundsWorld.getMinX();
         double w1 = boundsWorld.getMaxX();
@@ -160,7 +168,7 @@ class FunctionPainter implements Painter
             Point2D screenPoint = null;
             if (wy != null && Double.isFinite(wy.doubleValue()))
             {
-                screenPoint = worldToScreen.transform(
+                screenPoint = TEMP_TRANSFORM.transform(
                     new Point2D.Double(wx, wy.doubleValue()), null);
             }
             else

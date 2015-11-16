@@ -51,11 +51,6 @@
             <version>0.0.1</version>
         </dependency>
         <dependency>
-            <groupId>de.javagl</groupId>
-            <artifactId>hexagon</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <dependency>
         	<groupId>de.javagl</groupId>
         	<artifactId>viewer</artifactId>
         	<version>0.0.3-SNAPSHOT</version>

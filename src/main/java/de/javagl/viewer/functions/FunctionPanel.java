@@ -77,7 +77,7 @@ public class FunctionPanel extends Viewer
      * {@link MouseControls#createDefault(Viewer, boolean, boolean)
      * default mouse controls}, where non-uniform scaling is allowed,
      * but rotation is not allowed. The viewer will be 
-     * {@link #setFlippedVertically(boolean) flipped vertically}
+     * {@link #setFlippedVertically(boolean) flipped vertically} 
      * and {@link #setMaintainAspectRatio(boolean) not maintain the 
      * aspect ratio}. 
      */
@@ -86,7 +86,7 @@ public class FunctionPanel extends Viewer
         setMouseControl(MouseControls.createDefault(this, false, true));
         setFlippedVertically(true);
         setMaintainAspectRatio(false);
-        
+
         CoordinateSystemPainter coordinateSystemPainter = 
             new CoordinateSystemPainter();
         addPainter(coordinateSystemPainter);
@@ -184,7 +184,8 @@ public class FunctionPanel extends Viewer
             throw new NullPointerException("The paint is null");
         }
         functions.add(function);
-        FunctionPainter functionPainter = new FunctionPainter(function, paint);
+        FunctionPainter functionPainter = 
+            new FunctionPainter(function, paint);
         addPainter(functionPainter);
         functionPainters.add(functionPainter);
         legendProviders.add(legendProvider);
@@ -322,6 +323,7 @@ public class FunctionPanel extends Viewer
     public final void fit(double xMin, double xMax, 
         double marginX, double marginY, boolean maintainAspectRatio) 
     {
+        final double epsilon = 1e-6; 
         Number yMin = null;
         Number yMax = null;
         for (DoubleFunction<? extends Number> function : functions)
@@ -352,8 +354,8 @@ public class FunctionPanel extends Viewer
         double y = yMin.doubleValue() - marginY * dy;
         double w = dx + marginX * dx * 2.0;
         double h = dy + marginY * dy * 2.0;
-        Rectangle2D worldArea = new Rectangle2D.Double(x, y, w, h);
-        
+        h = Math.max(h, epsilon);
+        Rectangle2D worldArea = new Rectangle2D.Double(x, -h-y, w, h);
         boolean oldMaintainAspectRatioState = isMaintainAspectRatio();
         setMaintainAspectRatio(maintainAspectRatio);
         setDisplayedWorldArea(worldArea);
